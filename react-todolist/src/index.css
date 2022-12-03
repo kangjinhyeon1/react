@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 @font-face {
@@ -8,6 +9,6 @@ body {
   src: url("../public/font/EF_hyunydororong\(윈도우용_TTF\).ttf");
 }
 
-#root{
+#root *{
   font-family: EF_hyunydororong;
 }
