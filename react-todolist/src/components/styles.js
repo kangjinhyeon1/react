@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { ServerStyleSheet } from "styled-components";
 import bgimg from "../img/background.png";
 
 export const background = styled.div`
@@ -69,7 +69,15 @@ export const Line = styled.div`
 `;
 
 export const TodoList = styled.div`
-
+    overflow-y: scroll;
+    height: 60%;
+    ::-webkit-scrollbar{
+        width: 8px;
+    }
+    ::-webkit-scrollbar-thumb{
+        background-color: #A778F2;
+        border-radius: 20px;
+    }
 `;
 
 export const Todo = styled.div`
@@ -82,11 +90,17 @@ export const Todo = styled.div`
     margin-top: 30px;
     display: flex;
     align-items:center;
+    justify-content: space-between;
 `;
 
 export const Content = styled.div`
     font-size: 20px;
     color: #434343;
+`;
+
+export const BtnWarpper = styled.div`
+    padding-top: 5px;
+    cursor: pointer;
 `;
 
 export const Complete = styled.img`

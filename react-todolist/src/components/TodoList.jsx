@@ -6,30 +6,66 @@ import deletebtn from "../img/delete.svg";
 
 function TodoList(){
     const [ph, setPh] = useState("할 일을 입력!!");
+    const [ipvalue, setIpvalue] = useState("");
+    const [todo, setTodo] = useState([]);
+    const [check, setCheck] = useState(true);
     const changePh  = () =>{
         setPh("");
     }
+
     const rechangePh = () => {
         setPh("할 일을 입력");
     }
+
+    const AddTodo = () => {
+        setTodo( [...todo, ipvalue] );
+        setIpvalue('');
+        rechangePh();
+    }
+
+    const onkeydown = (e) => {
+        if(e.key === 'Enter'){
+            AddTodo();
+        }
+    }
+
+    const onchange = e => {
+        setIpvalue(e.target.value);
+    }
+
+    const TodoDelete = data => {
+        setTodo(todo.filter(todo => data !== todo));
+    }
+
     return (
             <S.background>
                 <S.TodoContainer>
                     <S.Title>TODOLIST!!</S.Title>
-                    <S.Input placeholder={ph} onFocus={changePh} onBlur={rechangePh}/>
-                    <S.PlusBtn>
+                    <S.Input 
+                        value={ipvalue}
+                        placeholder={ph}
+                        onFocus={changePh} 
+                        onBlur={rechangePh} 
+                        onKeyDown={onkeydown}
+                        onChange={onchange}
+                    />
+                    <S.PlusBtn onClick={AddTodo}>
                         <S.Plus src={plus}/>
                         <S.PlusBar/>
                     </S.PlusBtn>
                     <S.Line/>
                     <S.TodoList>
-                        <S.Todo>
-                            <S.Content>
-                                과학수행준비하기
-                            </S.Content>
-                            <S.Complete src={complete}/>
-                            <S.Delete src={deletebtn}/>
-                        </S.Todo>
+                        {todo.map((data) => (
+                            <S.Todo>
+                                <S.Content>
+                                    {data}
+                                </S.Content>
+                                <S.BtnWarpper>
+                                    <S.Complete src={complete}/>
+                                    <S.Delete src={deletebtn} onClick={ () => {TodoDelete(data);}}/>
+                                </S.BtnWarpper>
+                            </S.Todo>
+                        ))}
                     </S.TodoList>
                 </S.TodoContainer>
             </S.background>  
