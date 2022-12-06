@@ -37,10 +37,11 @@ function TodoList(){
         setTodo(todo.filter(todo => data !== todo));
     }
 
+
     return (
             <S.background>
                 <S.TodoContainer>
-                    <S.Title>TODOLIST!!</S.Title>
+                    <S.Title>TODOLIST!!!</S.Title>
                     <S.Input 
                         value={ipvalue}
                         placeholder={ph}
@@ -61,7 +62,7 @@ function TodoList(){
                                     {data}
                                 </S.Content>
                                 <S.BtnWarpper>
-                                    <S.Complete src={complete}/>
+                                    <S.Complete src={complete} onClick/>
                                     <S.Delete src={deletebtn} onClick={ () => {TodoDelete(data);}}/>
                                 </S.BtnWarpper>
                             </S.Todo>
