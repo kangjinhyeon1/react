@@ -8,17 +8,22 @@ function TodoList(){
     const [ph, setPh] = useState("할 일을 입력!!");
     const [ipvalue, setIpvalue] = useState("");
     const [todo, setTodo] = useState([]);
-    const [check, setCheck] = useState(true);
+    const [cnt, setCnt] = useState(1);
     const changePh  = () =>{
         setPh("");
     }
 
     const rechangePh = () => {
-        setPh("할 일을 입력");
+        setPh("할 일을 입력!!");
     }
 
     const AddTodo = () => {
-        setTodo( [...todo, ipvalue] );
+        setTodo([...todo,
+            { id : cnt,
+              value : ipvalue,
+              done : true
+            }]);
+        setCnt(cnt + 1);
         setIpvalue('');
         rechangePh();
     }
@@ -34,9 +39,12 @@ function TodoList(){
     }
 
     const TodoDelete = data => {
-        setTodo(todo.filter(todo => data !== todo));
+        setTodo(todo.filter(todo => data !== todo.id));
     }
 
+    const TodoComplete = () => {
+
+    }
 
     return (
             <S.background>
@@ -57,13 +65,13 @@ function TodoList(){
                     <S.Line/>
                     <S.TodoList>
                         {todo.map((data) => (
-                            <S.Todo>
+                            <S.Todo id = {data.id}>
                                 <S.Content>
-                                    {data}
+                                    {data.value}
                                 </S.Content>
                                 <S.BtnWarpper>
-                                    <S.Complete src={complete} onClick/>
-                                    <S.Delete src={deletebtn} onClick={ () => {TodoDelete(data);}}/>
+                                    <S.Complete src={complete} onClick={TodoComplete}/>
+                                    <S.Delete src={deletebtn} onClick={ () => {TodoDelete(data.id);}}/>
                                 </S.BtnWarpper>
                             </S.Todo>
                         ))}
